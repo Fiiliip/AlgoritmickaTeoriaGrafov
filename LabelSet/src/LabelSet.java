@@ -4,6 +4,11 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 
+/**
+ * LabelSet algoritmus na hľadanie najkratšej cesty v grafe.
+ * @author Filip Kubica
+ */
+
 public class LabelSet {
 
     private int pocetVrcholov;

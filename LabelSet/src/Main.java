@@ -1,6 +1,11 @@
 import java.io.File;
 import java.util.Scanner;
 
+/**
+ * LabelSet algoritmus na hľadanie najkratšej cesty v grafe.
+ * @author Filip Kubica
+ */
+
 public class Main {
 
     public static void main(String[] args) {
