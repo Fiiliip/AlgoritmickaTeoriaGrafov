@@ -4,7 +4,8 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        LabelSet labelSet = new LabelSet("./data/SlovRep.hrn", 1, 4);
+        // Odkomentovať, pre testovacie účely.
+//        LabelSet labelSet = new LabelSet("./data/Florida.hrn", 1, 1070376);
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Zadajte cestu k súboru (.hrn): ");
@@ -21,12 +22,8 @@ public class Main {
         System.out.print("Zadajte koncový vrchol: ");
         int koncovyVrchol = sc.nextInt();
 
-//        LabelSet labelSet = new LabelSet(cestaKSuboru, zaciatocnyVrchol, koncovyVrchol);
+        System.out.println();
 
-//        ./data/TEST_mini.hrn
-//        LabelSet labelSet = new LabelSet("./data/cvicenie.hrn");
-//        LabelSet labelSet = new LabelSet("./data/SlovRep.hrn");
-//        LabelSet labelSet = new LabelSet("./data/Florida.hrn");
-//        LabelSet labelSet = new LabelSet("./data/pr1.hrn");
+        LabelSet labelSet = new LabelSet(cestaKSuboru, zaciatocnyVrchol, koncovyVrchol);
     }
 }

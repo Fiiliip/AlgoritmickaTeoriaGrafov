@@ -1,5 +1,4 @@
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.time.Duration;
 import java.time.Instant;
@@ -15,17 +14,15 @@ public class LabelSet {
         Instant start = Instant.now();
 
         this.pocetVrcholov = 0;
-
         this.hrany = this.nacitajDataZoSuboru(cestaKSuboru);
         this.zoradPrvkyPodlaVrcholaOd(hrany);
-
         this.lokacieVrcholov = this.vratLokacieVrcholov();
-
         this.najdiNajkratsiuCestu(zaciatocnyVrchol, koncovyVrchol);
 
         Instant end = Instant.now();
         Duration timeElapsed = Duration.between(start, end);
-        System.out.println("\nTrvanie programu bolo " + timeElapsed.toMillis() + " milisekúnd.");
+
+        System.out.println("\n\nTrvanie programu bolo " + timeElapsed.toMillis() + " milisekúnd.");
     }
 
     public int vratPocetRiadkovVSubore(String cestaKSuboru) {
@@ -75,12 +72,14 @@ public class LabelSet {
         return hrany;
     }
 
+    // Pokus o iný spôsob zoraďovania údajov.
 //    public void zoradPrvkyPodlaVrcholaOd(int[][] data) {
 //        System.out.println("[Zoraďovanie prvkov poľa podľa vrchola od] Pracuje sa na...");
 //        Arrays.sort(data);
 //        System.out.println("[Zoraďovanie prvkov poľa podľa vrchola od] Hotovo!");
 //    }
 
+    // Použitie vylepšeného Bubble Sort algoritmu na vzostupné zoradenie hrán podľa vrcholuZ. Tento algoritmus zastaví, ak sa vo vnútornom cykle neprejaví žiadna zmena.
     public void zoradPrvkyPodlaVrcholaOd(int[][] data) {
         System.out.println("[Zoraďovanie prvkov poľa podľa vrchola od] Pracuje sa na...");
         for (int i = 0; i < data.length - 1; i++) {
@@ -100,6 +99,7 @@ public class LabelSet {
         System.out.println("[Zoraďovanie prvkov poľa podľa vrchola od] Hotovo!");
     }
 
+    // Vytvorenie poľa, kde indexy značia vrcholy a jednotlivé hodnoty lokáciu (index), na ktorom začína hrana s daným vstupným vrcholom.
     public int[] vratLokacieVrcholov() {
         int[] lokacieVrcholov = new int[this.pocetVrcholov + 1];
         for (int hrana = 0, lokacia = 0; hrana < this.hrany.length; hrana++) {
@@ -138,7 +138,7 @@ public class LabelSet {
             int riadiaciVrchol = this.vratVrcholSNajkratsouCestouDo(najkratsiaCestaDo, epsilon);
             epsilon.remove((Integer) riadiaciVrchol);
 
-            // prejdem vsetkymi hranami, kde riadiaci vrchol je vstupny vrchol, tu potrebujem pole, kde budem vediet, kde zacinaju jednotlive vrcholy a kde koncia
+            // Prejdem IBA všetkými hranami, kde riadiaci vrchol je vstupný vrchol.
             for (int vrchol = this.lokacieVrcholov[riadiaciVrchol]; vrchol < ((riadiaciVrchol + 1) != this.lokacieVrcholov.length ? this.lokacieVrcholov[riadiaciVrchol + 1] : this.lokacieVrcholov.length); vrchol++) {
                 if ((najkratsiaCestaDo[riadiaciVrchol] + this.hrany[vrchol][2]) < najkratsiaCestaDo[this.hrany[vrchol][1]]) {
                     najkratsiaCestaDo[this.hrany[vrchol][1]] = najkratsiaCestaDo[riadiaciVrchol] + this.hrany[vrchol][2];
@@ -169,6 +169,7 @@ public class LabelSet {
             return;
         }
 
+        // Zápis cesty od začiatočného vrchola do koncového vrchola v opačnom smere.
         ArrayList<Integer> cesta = new ArrayList<Integer>();
         int vrchol = koncovyVrchol;
         while (vrchol != 0) {
