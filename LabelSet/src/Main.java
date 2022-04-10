@@ -9,7 +9,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // Odkomentovať, pre testovacie účely.
+        // Odkomentovať, pre testovacie účely. Je potrebný mať súbor Florida.hrn.
 //        LabelSet labelSet = new LabelSet("./data/Florida.hrn", 1, 1070376);
 
         Scanner sc = new Scanner(System.in);

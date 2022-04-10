@@ -84,7 +84,7 @@ public class LabelSet {
 //        System.out.println("[Zoraďovanie prvkov poľa podľa vrchola od] Hotovo!");
 //    }
 
-    // Použitie vylepšeného Bubble Sort algoritmu na vzostupné zoradenie hrán podľa vrcholuZ. Tento algoritmus zastaví, ak sa vo vnútornom cykle neprejaví žiadna zmena.
+    // Použitie vylepšeného Bubble Sort algoritmu na vzostupné zoradenie hrán podľa vrcholuZo. Tento algoritmus sa zastaví, ak sa vo vnútornom cykle neprejaví žiadna zmena.
     public void zoradPrvkyPodlaVrcholaOd(int[][] data) {
         System.out.println("[Zoraďovanie prvkov poľa podľa vrchola od] Pracuje sa na...");
         for (int i = 0; i < data.length - 1; i++) {
@@ -106,6 +106,8 @@ public class LabelSet {
 
     // Vytvorenie poľa, kde indexy značia vrcholy a jednotlivé hodnoty lokáciu (index), na ktorom začína hrana s daným vstupným vrcholom.
     public int[] vratLokacieVrcholov() {
+        // Inicializácia pola, kde indexy značia jednotlivé vrcholy a hodnoty v poli značia index, na ktorom začínajú jednotlivé vrcholy v poli s hranami.
+        // Pole bude mať veľkosť o jednu väčšiu (+1), pretože nebudeme používať vrchol, ktorý má názov 0.
         int[] lokacieVrcholov = new int[this.pocetVrcholov + 1];
         for (int hrana = 0, lokacia = 0; hrana < this.hrany.length; hrana++) {
             if (this.hrany[hrana][0] != lokacia) {
@@ -170,27 +172,26 @@ public class LabelSet {
 
     public void vypisNajkratsiuCestu(int zaciatocnyVrchol, int koncovyVrchol, double[] najkratsiaCestaDo, int[] predchodca) {
         if (najkratsiaCestaDo[koncovyVrchol] == Double.POSITIVE_INFINITY) {
-            System.out.format("\nNajkratšia cesta z %d do %d neexistuje. \n", zaciatocnyVrchol, koncovyVrchol, (int)najkratsiaCestaDo[koncovyVrchol]);
+            System.out.format("\nNajkratšia cesta z %d do %d neexistuje!", zaciatocnyVrchol, koncovyVrchol);
             return;
         }
 
         // Zápis cesty od začiatočného vrchola do koncového vrchola v opačnom smere.
-        ArrayList<Integer> cesta = new ArrayList<Integer>();
+        ArrayList<Integer> orientovanySled = new ArrayList<Integer>();
         int vrchol = koncovyVrchol;
         while (vrchol != 0) {
-            cesta.add(vrchol);
+            orientovanySled.add(vrchol);
             vrchol = predchodca[vrchol];
         }
 
         System.out.format("\nNajkratšia cesta z %d do %d je: %d \n", zaciatocnyVrchol, koncovyVrchol, (int)najkratsiaCestaDo[koncovyVrchol]);
-        System.out.print("[");
-        for (int i = cesta.size() - 1; i >= 0; i--) {
-            if (i != 0) {
-                System.out.format("%d, ", cesta.get(i));
+        System.out.print("Orientovaný sled: (");
+        for (int i = orientovanySled.size() - 1; i > 0; i--) {
+            if (i != 1) {
+                System.out.format("%d, (%d, %d), ", orientovanySled.get(i), orientovanySled.get(i), orientovanySled.get(i - 1));
             } else {
-                System.out.format("%d", cesta.get(i));
+                System.out.format("%d, (%d, %d), %d)", orientovanySled.get(i), orientovanySled.get(i), orientovanySled.get(i - 1), orientovanySled.get(i - 1));
             }
         }
-        System.out.print("]");
     }
 }
