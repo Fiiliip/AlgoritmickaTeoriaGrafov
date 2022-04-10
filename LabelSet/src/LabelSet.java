@@ -53,7 +53,7 @@ public class LabelSet {
             int index = 0;
             String riadok;
             while ((riadok = bufferedReader.readLine()) != null) {
-                // Upravíme si riadok tak, aby sme mali hodnoty rozdelené len jednou medzerou. Všetky prebytočné "whitespaces" pred a za číslami za odstránia.
+                // Upravíme si riadok tak, aby sme mali hodnoty rozdelené len jednou medzerou. Všetky prebytočné "whitespaces" pred a za číslami sa odstránia.
                 String upravenyRiadok = riadok.trim().replaceAll("\\s+", " ");
                 String[] rozdelene = upravenyRiadok.split(" ");
 
