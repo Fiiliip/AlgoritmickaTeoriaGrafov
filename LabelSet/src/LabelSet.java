@@ -108,6 +108,7 @@ public class LabelSet {
 
     // Vytvorenie poľa, kde indexy značia vrcholy a jednotlivé hodnoty lokáciu (index), na ktorom začína hrana s daným vstupným vrcholom.
     public int[] vratLokacieVrcholov() {
+        System.out.println("[Vytváranie poľa so začínajúcimi lokáciami vrcholov] Pracuje sa na...");
         // Inicializácia pola, kde indexy značia jednotlivé vrcholy a hodnoty v poli značia index, na ktorom začínajú jednotlivé vrcholy v poli s hranami.
         // Pole bude mať veľkosť o jednu väčšiu (+1), pretože nebudeme používať vrchol, ktorý má názov 0.
         int[] lokacieVrcholov = new int[this.pocetVrcholov + 1];
@@ -117,6 +118,7 @@ public class LabelSet {
                 lokacieVrcholov[lokacia] = hrana;
             }
         }
+        System.out.println("[Vytváranie poľa so začínajúcimi lokáciami vrcholov] Hotovo!");
         return lokacieVrcholov;
     }
 
@@ -180,6 +182,7 @@ public class LabelSet {
             return;
         }
 
+        System.out.println("[Zapisovanie vrcholov do orientovaného sledu od konca] Pracuje sa na...");
         // Zápis cesty od začiatočného vrchola do koncového vrchola v opačnom smere.
         ArrayList<Integer> orientovanySled = new ArrayList<Integer>();
         int vrchol = koncovyVrchol;
@@ -187,6 +190,7 @@ public class LabelSet {
             orientovanySled.add(vrchol);
             vrchol = predchodca[vrchol];
         }
+        System.out.println("[Zapisovanie vrcholov do orientovaného sledu od konca] Hotovo!");
 
         System.out.format("\nNajkratšia cesta z %d do %d je: %d \n", zaciatocnyVrchol, koncovyVrchol, (int)najkratsiaCestaDo[koncovyVrchol]);
         System.out.print("Orientovaný sled: (");
