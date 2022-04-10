@@ -53,7 +53,9 @@ public class LabelSet {
             int index = 0;
             String riadok;
             while ((riadok = bufferedReader.readLine()) != null) {
-                String[] rozdelene = riadok.split(" ");
+                // Upravíme si riadok tak, aby sme mali hodnoty rozdelené len jednou medzerou. Všetky prebytočné "whitespaces" pred a za číslami za odstránia.
+                String upravenyRiadok = riadok.trim().replaceAll("\\s+", " ");
+                String[] rozdelene = upravenyRiadok.split(" ");
 
                 // Zapisovanie jednotlivých dát z riadku do poľa { vrchZo, vrchoDo, ohodnotenie }.
                 hrany[index][0] = Integer.parseInt(rozdelene[0]); // vrch zo
@@ -150,7 +152,9 @@ public class LabelSet {
                 if ((najkratsiaCestaDo[riadiaciVrchol] + this.hrany[vrchol][2]) < najkratsiaCestaDo[this.hrany[vrchol][1]]) {
                     najkratsiaCestaDo[this.hrany[vrchol][1]] = najkratsiaCestaDo[riadiaciVrchol] + this.hrany[vrchol][2];
                     predchodca[this.hrany[vrchol][1]] = riadiaciVrchol;
-                    epsilon.add(this.hrany[vrchol][1]);
+                    if (this.lokacieVrcholov[this.hrany[vrchol][1]] != 0) {
+                        epsilon.add(this.hrany[vrchol][1]);
+                    }
                 }
             }
         }

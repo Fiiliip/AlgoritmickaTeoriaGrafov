@@ -9,8 +9,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // Odkomentovať, pre testovacie účely. Je potrebný mať súbor Florida.hrn.
+        // Odkomentovať, pre testovacie účely. Je potrebný mať súbor Florida.hrn a SlovRep.hrn.
 //        LabelSet labelSet = new LabelSet("./data/Florida.hrn", 1, 1070376);
+//        LabelSet labelSet = new LabelSet("./data/SlovRep.hrn", 1, 237416);
 
         Scanner sc = new Scanner(System.in);
         System.out.print("Zadajte cestu k súboru (.hrn): ");
