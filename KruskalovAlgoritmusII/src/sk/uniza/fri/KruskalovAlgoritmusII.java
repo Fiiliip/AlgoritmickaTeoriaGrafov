@@ -2,8 +2,6 @@ package sk.uniza.fri;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -23,8 +21,8 @@ public class KruskalovAlgoritmusII {
         Instant start = Instant.now();
 
         this.pocetVrcholov = 0;
-
         this.hrany = this.nacitajDataZoSuboru(cestaKSuboru);
+
         this.zoradPrvkyPodlaOhodnotenia(this.hrany);
         this.najdiNajlacnejsiuKostru();
 
@@ -68,7 +66,6 @@ public class KruskalovAlgoritmusII {
 
     public void zoradPrvkyPodlaOhodnotenia(ArrayList<int[]> data) {
         System.out.println("[Zoraďovanie prvkov podľa ohodnotenia] Pracuje sa na...");
-//        Arrays.sort(H, (a, b) -> Integer.compare(a[2], b[2]));
         data.sort(new Comparator<int[]>() {
             @Override
             public int compare(int[] o1, int[] o2) {
@@ -121,6 +118,7 @@ public class KruskalovAlgoritmusII {
 
         ArrayList<int[]> najlacnejsiaKostra = new ArrayList<int[]>();
 
+        // Vytvorím si pole s vrcholmi a nastavím im hodnotu od 1 po celkový počet vrcholov.
         int[] vrcholy = new int[this.pocetVrcholov + 1];
         for (int i = 0; i < vrcholy.length; i++) {
             vrcholy[i] = i;
@@ -161,7 +159,6 @@ public class KruskalovAlgoritmusII {
         }
 
         System.out.println("[Hľadanie najlacnejšej kostry] Hotovo!");
-
         this.vypisNajlacnejsiuKostru(najlacnejsiaKostra);
     }
 

@@ -1,6 +1,7 @@
 package sk.uniza.fri;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -23,6 +24,8 @@ public class Main {
             return;
         }
 
-        KruskalovAlgoritmusII kruskalovAlgoritmusII = new KruskalovAlgoritmusII(cestaKSuboru);
+//        KruskalovAlgoritmusII kruskalovAlgoritmusII = new KruskalovAlgoritmusII(cestaKSuboru);
+//        KruskalovAlgoritmusIII kruskalovAlgoritmusIII = new KruskalovAlgoritmusIII(cestaKSuboru);
+        KruskalovAlgoritmusIV kruskalovAlgoritmusIV = new KruskalovAlgoritmusIV(cestaKSuboru);
     }
 }
