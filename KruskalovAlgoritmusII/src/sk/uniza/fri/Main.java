@@ -13,8 +13,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-//        KruskalovAlgoritmusII kruskalovAlgoritmusII = new KruskalovAlgoritmusII("./data/pr3.hrn");
-
         Scanner sc = new Scanner(System.in);
         System.out.print("Zadajte cestu k súboru (.hrn): ");
         String cestaKSuboru = sc.next();
@@ -24,8 +22,6 @@ public class Main {
             return;
         }
 
-//        KruskalovAlgoritmusII kruskalovAlgoritmusII = new KruskalovAlgoritmusII(cestaKSuboru);
-//        KruskalovAlgoritmusIII kruskalovAlgoritmusIII = new KruskalovAlgoritmusIII(cestaKSuboru);
-        KruskalovAlgoritmusIV kruskalovAlgoritmusIV = new KruskalovAlgoritmusIV(cestaKSuboru);
+        KruskalovAlgoritmusII kruskalovAlgoritmusII = new KruskalovAlgoritmusII(cestaKSuboru);
     }
 }
