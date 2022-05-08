@@ -109,6 +109,11 @@ public class KruskalovAlgoritmusII {
 
         ArrayList<int[]> najlacnejsiaKostra = new ArrayList<int[]>();
 
+        // Pridaj "vylepšovák", že si uchovám lokácie indexov jednotlivých vrcholov v poli s hodnotami.
+        // Na začiatku je algoritmus rýchly, pretože v poli s hodnotami je v každej hodnote max. 1 vrchol.
+        // Postupne, ale ako sa tie hodnoty vrcholov upravujú, tak viac a viac vrcholov je v menších hodnotách.
+        // Potom teda zakaždým dlho trvá, kým sa tie hodnoty zmenia na menšie.
+
         // Algoritmus je pri väčších objemoch hrán rýchlejší kvôli komplexnejšiemu meneniu
         // vrcholov s väčšou hodnotou na menšiu. Vytváram si 2 polia, kde do v 1. (vrcholy) sú indexy
         // vrcholy a hodnoty sú hodnoty vrcholov. V 2. poli (hodnoty) sú indexy hodnoty a hodnoty
@@ -173,6 +178,7 @@ public class KruskalovAlgoritmusII {
             // zo Stringu, kde boli predtým.
 
             // Načítam si jednotlivé vrcholy s väčšou hodnotou do poľa Stringov.
+
             String[] vrcholySVacsouHodnotou = hodnoty[vacsiaHodnotaVrchola].split(";");
 
             // Prejdem si každým vrcholom a zmením podľa neho hodnotu v poli s vrcholmi.
