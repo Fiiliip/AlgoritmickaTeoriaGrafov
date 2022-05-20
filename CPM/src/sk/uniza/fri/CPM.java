@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 
 /**
@@ -225,7 +226,14 @@ public class CPM {
             }
         }
 
-        this.dobaTrvaniaProjektu = najskorMoznyZaciatok[vrcholSNajvacsouDobouTrvania] + this.dobyTrvania[vrcholSNajvacsouDobouTrvania];
+        ArrayList<Integer> celkoveDobyTrvania = new ArrayList<>();
+        for (int i = 0; i < najskorMoznyZaciatok.length; i++) {
+            int x = najskorMoznyZaciatok[i] + this.dobyTrvania[i];
+            celkoveDobyTrvania.add(x);
+        }
+
+        this.dobaTrvaniaProjektu = Collections.max(celkoveDobyTrvania);
+//        this.dobaTrvaniaProjektu = najskorMoznyZaciatok[vrcholSNajvacsouDobouTrvania] + this.dobyTrvania[vrcholSNajvacsouDobouTrvania];
 
         System.out.println("[Hľadanie najskôr možných začiatkov] Hotovo!");
         return najskorMoznyZaciatok;
