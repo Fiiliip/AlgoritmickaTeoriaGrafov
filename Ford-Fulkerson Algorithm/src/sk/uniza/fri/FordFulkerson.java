@@ -2,7 +2,6 @@ package sk.uniza.fri;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.lang.reflect.Array;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
@@ -210,19 +209,12 @@ public class FordFulkerson {
         ArrayList<Integer> zvacsujucaPolocesta = new ArrayList<>();
         int aktualnyVrchol = this.ustie;
         zvacsujucaPolocesta.add(aktualnyVrchol);
-        while (aktualnyVrchol != this.zdroj) {
-            aktualnyVrchol = Math.abs((int)hodnotyVrcholov[aktualnyVrchol]);
-            zvacsujucaPolocesta.add(Math.abs(aktualnyVrchol)); // Musí vrátiť absolútnu hodnotu, pretože sa tu môžu nachádzať vrcholy so zápornou hodnotou.
+        while (Math.abs(aktualnyVrchol) != this.zdroj) {
+            aktualnyVrchol = (int)hodnotyVrcholov[aktualnyVrchol];
+            zvacsujucaPolocesta.add(aktualnyVrchol);
         }
 
         Collections.reverse(zvacsujucaPolocesta);
-
-//        for (Integer vrchol : zvacsujucaPolocesta) {
-//            System.out.print(vrchol + " ");
-//        }
-//
-//        System.out.println();
-
         return zvacsujucaPolocesta;
     }
 
@@ -239,20 +231,16 @@ public class FordFulkerson {
                 int priepustnost = this.hrany[hrana][2];
                 int tok = this.hrany[hrana][3];
 
-                // Ak je v SMERE.
-                if (vrchZo == aktualnyVrchol && vrchDo == nasledujuciVrchol) {
+                // Ak je v SMERE, teda ak je následujúci vrchol kladný.
+                if (nasledujuciVrchol > 0 && vrchZo == aktualnyVrchol && vrchDo == nasledujuciVrchol) {
                     int rezerva = priepustnost - tok;
-                    if (rezerva != 0) {
-                        rezervy.add(rezerva);
-                    }
+                    rezervy.add(rezerva);
                 }
 
-                // Ak je v PROTISMERE.
-                if (vrchDo == aktualnyVrchol && vrchZo == nasledujuciVrchol) {
+                // Ak je v PROTISMERE, teda ak je následujúci vrchol záporný.
+                if (nasledujuciVrchol < 0 && vrchZo == nasledujuciVrchol && vrchDo == aktualnyVrchol) {
                     int rezerva = tok;
-                    if (rezerva != 0) {
-                        rezervy.add(rezerva);
-                    }
+                    rezervy.add(rezerva);
                 }
             }
         }
@@ -273,13 +261,13 @@ public class FordFulkerson {
                     int vrchZo = this.hrany[hrana][0];
                     int vrchDo = this.hrany[hrana][1];
 
-                    // V SMERE.
-                    if (vrchZo == aktualnyVrchol && vrchDo == nasledujuciVrchol) {
+                    // Ak je v SMERE, teda ak je následujúci vrchol kladný.
+                    if (nasledujuciVrchol > 0 && vrchZo == aktualnyVrchol && vrchDo == nasledujuciVrchol) {
                         this.hrany[hrana][3] += rezerva;
                     }
 
-                    // V PROTISMERE.
-                    if (vrchDo == aktualnyVrchol && vrchZo == nasledujuciVrchol) {
+                    // Ak je v PROTISMERE, teda ak je následujúci vrchol záporný.
+                    if (nasledujuciVrchol < 0 && vrchZo == nasledujuciVrchol && vrchDo == aktualnyVrchol) {
                         this.hrany[hrana][3] -= rezerva;
                     }
                 }
@@ -310,7 +298,11 @@ public class FordFulkerson {
 
         System.out.print("\nToky na hranách siete: ");
         for (int hrana = 0; hrana < this.hrany.length; hrana++) {
-            System.out.format("[%d, %d, %d, %d], ", this.hrany[hrana][0], this.hrany[hrana][1], this.hrany[hrana][2], this.hrany[hrana][3]);
+            if (hrana != this.hrany.length - 1) {
+                System.out.format("[%d, %d, %d, %d], ", this.hrany[hrana][0], this.hrany[hrana][1], this.hrany[hrana][2], this.hrany[hrana][3]);
+            } else {
+                System.out.format("[%d, %d, %d, %d] ", this.hrany[hrana][0], this.hrany[hrana][1], this.hrany[hrana][2], this.hrany[hrana][3]);
+            }
         }
 
         System.out.format("\nMaximálny tok v sieti je: %d", maximalnyTokZoZdroja);
